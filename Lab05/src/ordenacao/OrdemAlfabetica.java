@@ -1,6 +1,8 @@
-package saga;
+package ordenacao;
 
 import java.util.Comparator;
+
+import saga.Compra;
 
 public class OrdemAlfabetica implements Comparator<Compra> {
 

@@ -1,7 +1,9 @@
-package saga;
+package ordenacao;
 
 import java.util.Comparator;
 import java.util.Map.Entry;
+
+import saga.Compra;
 
 public class OrdemData implements Comparator<Compra> {
 

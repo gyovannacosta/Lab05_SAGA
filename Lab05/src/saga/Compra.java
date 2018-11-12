@@ -71,6 +71,14 @@ public class Compra {
 		String[] aux = this.data.split("/");
 		return aux[0] + "-" + aux[1] + "-" + aux[2];
 	}
+	
+	public String getDescricao() {
+		return this.descricaoProduto;
+	}
+	
+	public String getNormalData() {
+		return this.data;
+	}
 
 	/**
 	 * O método toString(), tem como objetivo retornar a representação textual de

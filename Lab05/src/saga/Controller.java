@@ -3,9 +3,14 @@ package saga;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
 
 import ferramentas.Saida;
 import ferramentas.Validar;
+import ordenacao.OrdemCompraData;
+import ordenacao.OrdemCompraFornecedor;
+import ordenacao.OrdemCompraNome;
 
 /**
  * Controller é a classe responsável por controlar e determinar os métodos de
@@ -564,12 +569,62 @@ public class Controller {
 				|| criterio.trim().equalsIgnoreCase("data")) {
 			this.criterio = criterio;
 		} else {
-			throw new IllegalArgumentException("Opcao invalida.");
+			throw new IllegalArgumentException("Erro na listagem de compras: criterio nao oferecido pelo sistema.");
 		}
 	}
 
 	public String listarCompras() {
-		return null;
+		String result = "";
+		
+		List<Entry<String,Compra>> list = new ArrayList<>();
+		for(Cliente c : mapaCliente.values()) {
+			List<Entry<String,Compra>> aux = c.getListaCompras();
+			for(Entry<String,Compra> e : aux) {
+				list.add(e);
+			}
+		}
+		
+		if(criterio.equalsIgnoreCase("cliente")) {
+			Collections.sort(list, new OrdemCompraNome());
+		}else if(criterio.equalsIgnoreCase("fornecedor")) {
+			Collections.sort(list, new OrdemCompraFornecedor());
+		}else {
+			Collections.sort(list, new OrdemCompraData());
+		}
+		
+		for(int i = 0; i < list.size(); i++) {
+			Entry<String,Compra> e = list.get(i);
+			if(criterio.equalsIgnoreCase("cliente"))
+				result += auxListarCompras(
+							e.getKey(),
+							e.getValue().getNomeFornecedor(),
+							e.getValue().getDescricao(),
+							e.getValue().getNormalData()
+							);
+			
+			else if(criterio.equalsIgnoreCase("fornecedor"))
+				result += auxListarCompras(
+							e.getValue().getNomeFornecedor(),
+							e.getKey(),
+							e.getValue().getDescricao(),
+							e.getValue().getNormalData()
+							);
+			else
+				result += auxListarCompras(
+							e.getValue().getNormalData(),
+							e.getKey(),
+							e.getValue().getNomeFornecedor(),
+							e.getValue().getDescricao()
+							);
+			
+			if(i+1 < list.size()) result += " | ";
+		}
+		
+		return result;
+	}
+	
+	private String auxListarCompras(Object a, Object b, Object c, Object d) {
+		return a + ", " + b + ", " + c + ", " + d;
 	}
 
 }

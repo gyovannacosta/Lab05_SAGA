@@ -356,7 +356,7 @@ public class Validar {
 	}
 
 	private static boolean isNulo(String valor) {
-		return valor.trim() == null;
+		return valor == null;
 	}
 
 	private static boolean isVazio(String valor) {
@@ -432,10 +432,10 @@ public class Validar {
 
 	public static void validaOrdenaPor(String criterio) {
 		if (isNulo(criterio)) {
-			throw new NullPointerException("Opcao invalida: criterio nao pode ser vazio ou nulo.");
+			throw new NullPointerException("Erro na listagem de compras: criterio nao pode ser vazio ou nulo.");
 		}
 		if (isVazio(criterio)) {
-			throw new IllegalArgumentException("Opcao invalida: criterio nao pode ser vazio ou nulo.");
+			throw new IllegalArgumentException("Erro na listagem de compras: criterio nao pode ser vazio ou nulo.");
 		}
 
 	}

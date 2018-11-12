@@ -1,13 +1,17 @@
 package saga;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import ferramentas.Validar;
+import ordenacao.OrdemAlfabetica;
+import ordenacao.OrdemData;
 
 /**
  * Cliente é uma classe responsável por armazenar nome, cpf, email e localização
@@ -197,7 +201,6 @@ public class Cliente implements Comparable<Cliente> {
 				if (i + 1 < compras.size())
 					listar += " | ";
 			}
-
 			return listar.trim();
 		}
 		throw new IllegalArgumentException("Erro ao exibir contas do cliente: cliente nao tem nenhuma conta.");
@@ -210,4 +213,14 @@ public class Cliente implements Comparable<Cliente> {
 			}
 		}	
 	}
+	
+	public List<Entry<String,Compra>> getListaCompras() {
+		List<Entry<String,Compra>> list = new ArrayList<>();
+		for(Compra c : compras) {
+			Entry<String,Compra> entry = new AbstractMap.SimpleEntry<>(this.nome, c);
+			list.add(entry);
+		}
+		return list;
+	}
+	
 }

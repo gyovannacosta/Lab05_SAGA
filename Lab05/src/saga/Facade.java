@@ -19,7 +19,7 @@ public class Facade {
 	public static void main(String[] args) {
 		args = new String[] { "saga.Facade", "acceptionTest/use_case_1.txt", "acceptionTest/use_case_2.txt",
 				"acceptionTest/use_case_3.txt", "acceptionTest/use_case_4.txt", "acceptionTest/use_case_5.txt",
-				"acceptionTest/use_case_6.txt" };
+				"acceptionTest/use_case_6.txt", "acceptionTest/use_case_7.txt" };
 		EasyAccept.main(args);
 	}
 
@@ -318,11 +318,11 @@ public class Facade {
 	public void realizaPagamento(String cpf, String nomeFornecedor) {
 		controller.realizaPagamento(cpf, nomeFornecedor);
 	}
-	
+
 	public void ordenaPor(String criterio) {
 		controller.ordenaPor(criterio);
 	}
-	
+
 	public String listarCompras() {
 		return controller.listarCompras();
 	}

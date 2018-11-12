@@ -426,7 +426,7 @@ public class Fornecedor implements Comparable<Fornecedor> {
 			this.mapaContas.remove(cpf);
 		} else {
 			throw new IllegalArgumentException(
-					"Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor");
+					"Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor.");
 		}
 	}
 
