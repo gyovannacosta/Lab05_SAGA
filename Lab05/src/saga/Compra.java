@@ -63,7 +63,8 @@ public class Compra {
 	}
 
 	/**
-	 * O método getData(), tem como objetivo retornar a data da compra do produto.
+	 * O método getData(), tem como objetivo retornar a data da compra do produto
+	 * formatada.
 	 * 
 	 * @return data da compra do produto.
 	 */
@@ -71,11 +72,22 @@ public class Compra {
 		String[] aux = this.data.split("/");
 		return aux[0] + "-" + aux[1] + "-" + aux[2];
 	}
-	
+
+	/**
+	 * O método getDescricao(), tem como objetivo retornar a descricao da compra.
+	 * 
+	 * @return descricao da compra.
+	 */
 	public String getDescricao() {
 		return this.descricaoProduto;
 	}
-	
+
+	/**
+	 * O método getNormalData(), tem como objetivo retornar a data do produto sem
+	 * formatação adicional.
+	 * 
+	 * @return data da compra do produto.
+	 */
 	public String getNormalData() {
 		return this.data;
 	}

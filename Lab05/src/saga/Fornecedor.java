@@ -421,6 +421,13 @@ public class Fornecedor implements Comparable<Fornecedor> {
 				"Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
 	}
 
+	/**
+	 * O método realizaPagamento(), tem como objetivo realizar o pagamento de uma
+	 * conta de um cliente e remover essa conta do sistema.
+	 * 
+	 * @param cpf            cpf do cliente.
+	 * @param nomeFornecedor nome do fornecedor.
+	 */
 	public void realizaPagamento(String cpf, String nomeFornecedor) {
 		if (existeConta(cpf)) {
 			this.mapaContas.remove(cpf);

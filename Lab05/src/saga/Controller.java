@@ -547,6 +547,15 @@ public class Controller {
 		throw new IllegalArgumentException("Erro ao exibir contas do cliente: cliente nao existe.");
 	}
 
+	/**
+	 * O método realizaPagamento(), tem como objetivo receber um cpf de um cliente e
+	 * o nome de um fornecedor. O mesmo verifica se as informações são válidas, caso
+	 * sejam inválidas o sistema lança uma exceção, caso contrário é realizado o
+	 * pagamento total da conta que o cliente possui com o fornecedor.
+	 * 
+	 * @param cpf            cpf informado pelo usuário.
+	 * @param nomeFornecedor nome informado pelo usuário.
+	 */
 	public void realizaPagamento(String cpf, String nomeFornecedor) {
 		Validar.validaRealizaPagamento(cpf, nomeFornecedor);
 		if (existeCliente(cpf)) {
@@ -563,6 +572,14 @@ public class Controller {
 
 	}
 
+	/**
+	 * O método realizaPagamento(), tem como objetivo receber uma String informado o
+	 * criterio de ordenação da lista de compras do sistema. O mesmo verifica se as
+	 * informações são válidas, caso sejam inválidas o sistema lança uma exceção,
+	 * caso contrário é gravado no sistema o critério válido.
+	 * 
+	 * @param criterio critério informado pelo usuário.
+	 */
 	public void ordenaPor(String criterio) {
 		Validar.validaOrdenaPor(criterio);
 		if (criterio.trim().equalsIgnoreCase("cliente") || criterio.trim().equalsIgnoreCase("fornecedor")
@@ -573,56 +590,62 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * O método listarCompras(), tem como objetivo retornar a representação textual
+	 * das compras cadastradas no sistema de acordo com a forma de ordenação
+	 * definida pelo critério anteriormente.
+	 * 
+	 * @return representação textual de compras de acordo com critério informado.
+	 */
 	public String listarCompras() {
 		String result = "";
-		
-		List<Entry<String,Compra>> list = new ArrayList<>();
-		for(Cliente c : mapaCliente.values()) {
-			List<Entry<String,Compra>> aux = c.getListaCompras();
-			for(Entry<String,Compra> e : aux) {
+
+		List<Entry<String, Compra>> list = new ArrayList<>();
+		for (Cliente c : mapaCliente.values()) {
+			List<Entry<String, Compra>> aux = c.getListaCompras();
+			for (Entry<String, Compra> e : aux) {
 				list.add(e);
 			}
 		}
-		
-		if(criterio.equalsIgnoreCase("cliente")) {
+
+		if (criterio.equalsIgnoreCase("cliente")) {
 			Collections.sort(list, new OrdemCompraNome());
-		}else if(criterio.equalsIgnoreCase("fornecedor")) {
+		} else if (criterio.equalsIgnoreCase("fornecedor")) {
 			Collections.sort(list, new OrdemCompraFornecedor());
-		}else {
+		} else {
 			Collections.sort(list, new OrdemCompraData());
 		}
-		
-		for(int i = 0; i < list.size(); i++) {
-			Entry<String,Compra> e = list.get(i);
-			if(criterio.equalsIgnoreCase("cliente"))
-				result += auxListarCompras(
-							e.getKey(),
-							e.getValue().getNomeFornecedor(),
-							e.getValue().getDescricao(),
-							e.getValue().getNormalData()
-							);
-			
-			else if(criterio.equalsIgnoreCase("fornecedor"))
-				result += auxListarCompras(
-							e.getValue().getNomeFornecedor(),
-							e.getKey(),
-							e.getValue().getDescricao(),
-							e.getValue().getNormalData()
-							);
+
+		for (int i = 0; i < list.size(); i++) {
+			Entry<String, Compra> e = list.get(i);
+			if (criterio.equalsIgnoreCase("cliente"))
+				result += auxListarCompras(e.getKey(), e.getValue().getNomeFornecedor(), e.getValue().getDescricao(),
+						e.getValue().getNormalData());
+
+			else if (criterio.equalsIgnoreCase("fornecedor"))
+				result += auxListarCompras(e.getValue().getNomeFornecedor(), e.getKey(), e.getValue().getDescricao(),
+						e.getValue().getNormalData());
 			else
-				result += auxListarCompras(
-							e.getValue().getNormalData(),
-							e.getKey(),
-							e.getValue().getNomeFornecedor(),
-							e.getValue().getDescricao()
-							);
-			
-			if(i+1 < list.size()) result += " | ";
+				result += auxListarCompras(e.getValue().getNormalData(), e.getKey(), e.getValue().getNomeFornecedor(),
+						e.getValue().getDescricao());
+
+			if (i + 1 < list.size())
+				result += " | ";
 		}
-		
+
 		return result;
 	}
-	
+
+	/**
+	 * O método auxListarCompras() é um método privado que tem como objetivo
+	 * auxiliar o método listarCompras() na forma em que vai retornar para a facade.
+	 * 
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @param d
+	 * @return String e valores formatados.
+	 */
 	private String auxListarCompras(Object a, Object b, Object c, Object d) {
 		return a + ", " + b + ", " + c + ", " + d;
 	}

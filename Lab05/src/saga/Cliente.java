@@ -206,21 +206,32 @@ public class Cliente implements Comparable<Cliente> {
 		throw new IllegalArgumentException("Erro ao exibir contas do cliente: cliente nao tem nenhuma conta.");
 	}
 
+	/**
+	 * O método realizaPagamento(), tem como objetivo identificar uma compra e
+	 * remover ela do ArrayList de compras.
+	 * 
+	 * @param nomeFornecedor nome do fornecedor da compra.
+	 */
 	public void realizaPagamento(String nomeFornecedor) {
 		for (int i = 0; i < this.compras.size(); i++) {
-			if(compras.get(i).getNomeFornecedor().equals(nomeFornecedor)) {
+			if (compras.get(i).getNomeFornecedor().equals(nomeFornecedor)) {
 				this.compras.remove(i);
 			}
-		}	
+		}
 	}
-	
-	public List<Entry<String,Compra>> getListaCompras() {
-		List<Entry<String,Compra>> list = new ArrayList<>();
-		for(Compra c : compras) {
-			Entry<String,Compra> entry = new AbstractMap.SimpleEntry<>(this.nome, c);
+
+	/**
+	 * 
+	 * @return retorna uma lista de compras associada a uma chave em String, que é o
+	 *         nome do cliente.
+	 */
+	public List<Entry<String, Compra>> getListaCompras() {
+		List<Entry<String, Compra>> list = new ArrayList<>();
+		for (Compra c : compras) {
+			Entry<String, Compra> entry = new AbstractMap.SimpleEntry<>(this.nome, c);
 			list.add(entry);
 		}
 		return list;
 	}
-	
+
 }

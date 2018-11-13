@@ -303,7 +303,7 @@ public class Facade {
 	}
 
 	/**
-	 * * O método exibeContasClientes(), tem como objetivo informar ao controller um
+	 * O método exibeContasClientes(), tem como objetivo informar ao controller um
 	 * cpf de um cliente e receber a representação textual de todas as compras que
 	 * esse cliente tem cadastradas no sistema.
 	 * 
@@ -315,14 +315,34 @@ public class Facade {
 		return controller.exibeContasClientes(cpf);
 	}
 
+	/**
+	 * O método realizaPagamento(), tem como objetivo informar ao controller um cpf
+	 * de um cliente e o nome de um fornecedor e realizar o pagamento de uma conta
+	 * do cliente nesse fornecedor.
+	 * 
+	 * @param cpf            cpf informado pelo usuário.
+	 * @param nomeFornecedor nome informado pelo usuário.
+	 */
 	public void realizaPagamento(String cpf, String nomeFornecedor) {
 		controller.realizaPagamento(cpf, nomeFornecedor);
 	}
 
+	/**
+	 * O método ordenaPor(), tem como objetivo definir o critério de ordenação da
+	 * lista de retorno que será usada no método listarCompras().
+	 * 
+	 * @param criterio criterio informado pelo usuário.
+	 */
 	public void ordenaPor(String criterio) {
 		controller.ordenaPor(criterio);
 	}
 
+	/**
+	 * O método listarCompras(), tem como objetivo retornar a representação textual
+	 * de todas as compras cadastradas no sistema.
+	 * 
+	 * @return representação textual das compras feitas no sistema.
+	 */
 	public String listarCompras() {
 		return controller.listarCompras();
 	}
